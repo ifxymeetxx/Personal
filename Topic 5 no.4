@@ -1,0 +1,23 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+file_path = "C:/Users/yusuf/Downloads/STATISTIKA dan Probabilitas/Data_Sales.csv"
+df = pd.read_csv(file_path, encoding='windows-1252', delimiter=';')
+
+data_jakarta = df[
+    (df['City'] == 'DKI Jakarta') & 
+    (df['Year'].between(2014, 2017))
+]
+purchases_per_year = data_jakarta.groupby('Year').size()
+
+print("Jumlah Pembelian per Tahun di DKI Jakarta (2014-2017):")
+print(purchases_per_year)
+
+plt.figure(figsize=(8, 6))
+purchases_per_year.plot(kind='bar', color='skyblue')
+plt.title('Pembelian Barang per Tahun di Kota DKI Jakarta (2014-2017)')
+plt.xlabel('Tahun')
+plt.ylabel('Jumlah Pembelian')
+plt.xticks(rotation=0)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show()
