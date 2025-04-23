@@ -1,0 +1,34 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Read the data
+file_path = "C:/Users/yusuf/Downloads/STATISTIKA dan Probabilitas/Data_Sales.csv"
+df = pd.read_csv(file_path, encoding='windows-1252', delimiter=';')
+
+# Filter data for 2015, City 'DKI Jakarta', and Category 'Office Supplies'
+data_2015 = df[
+    (df['Year'] == 2015) & 
+    (df['City'] == 'DKI Jakarta') & 
+    (df['Category'] == 'Office Supplies')
+]
+
+# Calculate total buyers and Corporate buyers for Office Supplies
+total_buyers = len(data_2015)
+corporate_buyers = len(data_2015[data_2015['Segment'] == 'Corporate'])
+
+# Calculate probability
+probability = corporate_buyers / total_buyers if total_buyers > 0 else 0
+
+# Print results
+print(f"\nAnalisis Pembelian Office Supplies tahun 2015 di DKI Jakarta:")
+print(f"Total pembeli: {total_buyers}")
+print(f"Pembeli Corporate: {corporate_buyers}")
+print(f"Peluang pembeli Corporate: {probability:.2%}")
+
+# Create pie chart for visualization
+plt.figure(figsize=(8, 6))
+buyer_types = data_2015['Segment'].value_counts()
+plt.pie(buyer_types, labels=buyer_types.index, autopct='%1.1f%%')
+plt.title('Distribusi Tipe Pembeli Office Supplies di DKI Jakarta (2015)')
+plt.axis('equal')
+plt.show()

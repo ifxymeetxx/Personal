@@ -1,0 +1,16 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+df_2014 = df[df["Year"] == 2014]
+category_counts = df_2014["Category"].value_counts()
+
+plt.figure(figsize=(8, 5))
+category_counts.plot(kind="bar", color=["red", "orange", "yellow"])
+plt.title("Distribusi Frekuensi Kategori Produk (2014)")
+plt.xlabel("Kategori Produk")
+plt.ylabel("Jumlah Produk Terjual")
+plt.xticks(rotation=0)
+plt.grid(axis="y", linestyle="--", alpha=0.7)
+plt.show()
+
+print(category_counts)

@@ -1,0 +1,13 @@
+import pandas as pd
+
+lokasi_file = "D:/Data Sales.csv"
+data = pd.read_csv(lokasi_file, encoding='windows-1252', delimiter=';')
+
+print("Kategori Unik dalam dataset:", data['Category'].unique())
+
+data_teknologi = data[data['Category'] == 'Technology']
+
+penjualan_per_produk = data_teknologi.groupby('Product Name')['Sales'].sum().sort_values(ascending=False).head(5)
+
+print("\nTop 5 Produk berdasarkan Penjualan pada Kategori Technology:")
+print(penjualan_per_produk)
